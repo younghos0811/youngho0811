@@ -3,9 +3,8 @@ package BackJun.DivideConque;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
-public class SumArray_11728_v2 {
+public class SumArray_11728_v2_useMerge {
 
 /*
 분류 : Divide & Conquer
@@ -61,68 +60,75 @@ public class SumArray_11728_v2 {
 		arr = new int[arr1.length+arr2.length];
 		int i=0;
 		
-		splits = br.readLine().split(" ");
-		for(String s : splits) {
-			arr[i] = Integer.valueOf(s);
+		for(String s : br.readLine().split(" ")) {
+			arr1[i] = Integer.valueOf(s);
 			i++;
 		}
 		
-		splits = br.readLine().split(" ");
-		for(String s : splits) {
-			arr[i] = Integer.valueOf(s);
+		i=0;
+		for(String s : br.readLine().split(" ")) {
+			arr2[i] = Integer.valueOf(s);
 			i++;
 		}
 		
-		for(i=0; i<arr.length; i++) {
-			System.out.print(arr[i] +" ");
-		}
-		System.out.println();
-		
-		sort(0,arr.length);
-		
-		
-		for(i=0; i<arr.length; i++) {
-			System.out.print(arr[i] +" ");
-		}
-		
-		
-	}
-	
-	
-	private static void sort(int start, int end) {
-		if(start == end)
-			return;
-		
-		int mid = (start+end)/2;
-		sort(start,mid);
-		sort(mid+1,end);
-		
-		merge(start,end);
-		
-	}
-	
-	private static void merge(int start, int end) {
-		int[] tempArr = new int[end-start+1];
-		int mid = (start+end)/2;
-		int i = start;
-		int j = mid+1;
-		int k=0;
-		
-		while(i<=mid && j<end) {
-			if(arr[i] < arr[j])
-				tempArr[k++] = arr[j++];
+		int first =0;
+		int second = 0;
+		int k =0;
+		while(first < arr1.length && second < arr2.length){
+			if(arr1[first] < arr2[second])
+				arr[k++] = arr1[first++];
 			else
-				tempArr[k++] = arr[i++];
+				arr[k++] = arr2[second++];
 		}
 		
-		while(i<=mid)
-			tempArr[k++] = arr[i++];
-		while(j<end)
-			tempArr[k++] = arr[j++];
+		while(first < arr1.length)
+			arr[k++] = arr1[first++];
+		while(second < arr2.length)
+			arr[k++] = arr2[second++];
 		
-		for(i=start; i<end; i++) {
-			arr[i] = tempArr[i-start];
-		}		
+		for(i=0; i<arr.length; i++) {
+			System.out.print(arr[i] +" ");
+		}
+		
+		
 	}
+	
+//	
+//	private static void sort(int start, int end) {
+//		if(start == end)
+//			return;
+//		
+//		int mid = (start+end)/2;
+//		sort(start,mid);
+//		sort(mid+1,end);
+//		
+//		merge(start,end);
+//		
+//	}
+//	
+//	private static void merge(int start, int end) {
+//
+//		int[] tempArr = new int[end-start+1];
+//		int mid = (start+end)/2;
+//		int i = start;
+//		int j = mid+1;
+//		int k=0;
+//		
+//		while(i<=mid && j<end) {
+//			if(arr[i] < arr[j])
+//				tempArr[k++] = arr[i++];
+//			else
+//				tempArr[k++] = arr[j++];
+//		}
+//		
+//		while(i<=mid)
+//			tempArr[k++] = arr[i++];
+//		while(j<end)
+//			tempArr[k++] = arr[j++];
+//		
+//		for(i=start; i<end; i++) {
+//			arr[i] = tempArr[i-start];
+//		}		
+//	}
 	
 }
